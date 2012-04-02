@@ -59,7 +59,7 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
     http://drupal.org/project/ctools 
     http://drupal.org/project/custom_search 
     http://drupal.org/project/date 
-    http://drupal.org/project/datesort 
+    http://drupal.org/files/issues/datesort.zip 
     http://drupal.org/project/devel 
     http://drupal.org/project/filefield 
     http://drupal.org/project/gmap 
@@ -83,7 +83,7 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
     http://drupal.org/project/menu_breadcrumb 
     http://drupal.org/project/messaging 
     http://drupal.org/project/mimemail 
-    http://drupal.org/project/mutual_credit (6.x-2.3 and 6.x-2.4 not fully tested)
+    http://drupal.org/project/mutual_credit (should use 6.x-2.5)
     http://drupal.org/project/nodeblock 
     http://drupal.org/project/node_expire 
     http://drupal.org/project/nodereference_url 
@@ -107,7 +107,7 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
     http://drupal.org/project/taxonomy_manager 
     http://drupal.org/project/term_node_count 
     http://drupal.org/project/terms_of_use 
-    http://drupal.org/project/token (use 6.x-1.6)
+    http://drupal.org/project/token (use 6.x-1.16)
     http://drupal.org/project/userprotect 
     http://drupal.org/project/user_register_notify 
     http://drupal.org/project/views 
@@ -128,9 +128,9 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
 
 You should be able to use the most recent recommended 6.x versions of these modules with a few exceptions:
 
-Token version 6.x-1.8 doesn't work with auto_nodetitle when the adminitrator is creating a new user.  The user first and last name do not get set correctly at the title of a user's content profile. 6.x-1.6 works fine.
+Token version 6.x-1.18 doesn't work with auto_nodetitle when the adminitrator is creating a new user.  The user first and last name do not get set correctly at the title of a user's content profile. 6.x-1.16 works fine.
 
-We have not yet tested version 6.x-2.3 or 6.x-2.4 of mutual credit.  Community Weaver 2.0 currently uses a development version that was available after 6.x-2.2 was released.
+Community Weaver 2.0 currently uses a development version that was available after 6.x-2.2 was released.  We've just tested 6.x-2.5 and are about to move all hosted timebanks to that version.
 
 The last release of views_send does not work with the newest version of views_bulk_operations.  A patch is supposedly available here: https://drupal.org/node/1200584 but we have not yet tested it.  The only release available now, a dev release, may or may not contain that patch.
 3. Install Supporting Code Libraries
@@ -139,7 +139,7 @@ In [Drupal_Home]/sites/all/libraries you'll need the following related libraries
 
     http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.2/ckeditor...
     http://code.google.com/p/jquery-ui/downloads/detail?name=jquery.ui-1.6.z...
-    http://autobahn.tablesorter.com/jquery.tablesorter.zip
+    http://tablesorter.com/__jquery.tablesorter.zip
 
 4. Install the Required Theme
 
