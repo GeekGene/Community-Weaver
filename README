@@ -1,7 +1,3 @@
-This repository contains a MYSQL dump of an empty or template drupal database for Community Weaver 2.0.
-
-This README also contains an install guide.
-
 Overview
 
 This installation guide is intended for someone who knows Drupal and wants to install Community Weaver 2.0 on their own server.
@@ -23,7 +19,6 @@ The installation process includes the following 10 steps. (see below for details
 8. Configure Various Community Weaver and Drupal System Components
 9. Configure Web Host Settings
 10. Configure Final Settings in Drupal
- 
 1. Install Drupal
 
 Start with a fresh installation of drupal 6.x and install it as a multisite installation.  As of this writing the current version is 6.25.  Where this should be installed is highly dependent upon your host/server provider, but generally goes wherever index.html can be found.  It might be /var/www/html or ~/www or /public_html. A guide on drupal installation can be found here.  Download the compressed archive of drupal from http://drupal.org/project/drupal.  From the command line you can use the following, replacing the x with the appropriate version:
@@ -59,7 +54,7 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
     http://drupal.org/project/ctools 
     http://drupal.org/project/custom_search 
     http://drupal.org/project/date 
-    http://drupal.org/files/issues/datesort.zip 
+    http://drupal.org/files/issues/datesort.zip
     http://drupal.org/project/devel 
     http://drupal.org/project/filefield 
     http://drupal.org/project/gmap 
@@ -110,7 +105,7 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
     http://drupal.org/project/token (use 6.x-1.16)
     http://drupal.org/project/userprotect 
     http://drupal.org/project/user_register_notify 
-    http://drupal.org/project/views 
+    http://drupal.org/project/views (use 6.x-2.13)
     http://drupal.org/project/views_bonus 
     http://drupal.org/project/views_bulk_operations 
     http://drupal.org/project/views_customfield 
@@ -124,21 +119,21 @@ Then you'll also need the following contributed modules installed in [Drupal_Hom
     http://drupal.org/project/views_tree 
     http://drupal.org/project/webform 
     http://drupal.org/project/wysiwyg
-     
 
 You should be able to use the most recent recommended 6.x versions of these modules with a few exceptions:
 
 Token version 6.x-1.18 doesn't work with auto_nodetitle when the adminitrator is creating a new user.  The user first and last name do not get set correctly at the title of a user's content profile. 6.x-1.16 works fine.
+Community Weaver 2.0 currently originally used a development version of Mutual Credit that was available after 6.x-2.2 was released.  We're now on 6.x-2.5.  BTW, we couldn't have done this project without Matthew Slater.  He's been a big help, and very responsive.
 
-Community Weaver 2.0 currently uses a development version that was available after 6.x-2.2 was released.  We've just tested 6.x-2.5 and are about to move all hosted timebanks to that version.
+Views 6.x-2.16 caused some problems with custom fields.  2.15 may work, but we haven't extensively tested it.  We know 2.13 works.
 
 The last release of views_send does not work with the newest version of views_bulk_operations.  A patch is supposedly available here: https://drupal.org/node/1200584 but we have not yet tested it.  The only release available now, a dev release, may or may not contain that patch.
 3. Install Supporting Code Libraries
 
 In [Drupal_Home]/sites/all/libraries you'll need the following related libraries:
 
-    http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.2/ckeditor...
-    http://code.google.com/p/jquery-ui/downloads/detail?name=jquery.ui-1.6.z...
+    http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.2/ckeditor_3.6.2.zip
+    http://code.google.com/p/jquery-ui/downloads/detail?name=jquery.ui-1.6.zip&can=2&q=1.6
     http://tablesorter.com/__jquery.tablesorter.zip
 
 4. Install the Required Theme
@@ -164,13 +159,12 @@ Download the whole Community Weaver package from here: https://github.com/GeekGe
 
 Files that should included in download:
 
+
     CHANGELOG.txt    log of changes
     COPYRIGHT.txt      copyright statement, references GNU GPL 2.0
     LICENSE.txt           The GNU GPL 2.0 license agreement
     README                to be read
     tbtempl.sql.bz2       database dump
-
- 
 
 Uncompress the database file.  From the command line:
 
@@ -194,7 +188,6 @@ The database name in this file is drupal622_template.  You can change that to wh
 
     (mysql prompt) mysql> flush privileges;
 
- 
 8. Configure Various Community Weaver and Drupal System Components
 
 In settings.php on the line that starts with $db_url change the settings to those you just used for database name (if you changed it), username, and password.  Thus:
@@ -204,6 +197,7 @@ In settings.php on the line that starts with $db_url change the settings to thos
 Resave the file and make sure only your user and group have read access with something like this:
 
      chmod 440 settings.php
+
 
 In [Drupal_Home]/sites/all/themes/acquia_marina create a symbolic link to ../../modules/time_banks/theme/mc_3rdparty_formspecial.tpl.php
 
@@ -242,8 +236,6 @@ Click the MY ACCOUNT tab and then click [ Edit User Account ] in the left sideba
 
 We've provided a copy of the database exactly as we use it on our server.  Thus, there are a few more things you'll need to set up inside Drupal.
 
- 
-
 Flush all caches.  From the admin bar at the top of the page, click the icon next to Content management, and then click Flush All Caches
 
 Change file path.  Browse to http://[YOURSITE]/admin/settings/file-system. Change to sites/[YOURSITE]/files
@@ -253,6 +245,7 @@ Turn off the rule "add to coordinators list" in http://[YOURSITE]/admin/rules/ru
 Click "rule settings" and uncheck "This rule is active and should be evaluated when the associated event occurs.", click save.
 
 Delete the action "time_banks_manage_lists" on http://[YOURSITE]/admin/settings/actions.  This is more email list management.
+
 
 Set your site name and site-wide email on http://[YOURSITE]/admin/settings/site-information. If using drush, they are variables site_name and site_mail
 
@@ -272,3 +265,4 @@ The header of the marketplace view http://[YOURSITE]/admin/build/views/edit/mark
 
 Edit the footer block visible on all pages at http://[YOURSITE]/admin/build/block/configure/block/5?destination=welcome which references a TimeBanks USA logo.  Set to whatever you like or remove the html.
 Enjoy Your New Timebank
+
