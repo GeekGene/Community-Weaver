@@ -1,4 +1,11 @@
-Overview
+# Community Weaver 2.0 - Timebanking System from TimeBanksUSA
+
+## Background
+This is an open source template for running a timebank on Drupal. It was built by The Geek Gene for Time Banks USA as an upgrade to their previous timebanking system which ran on a BBS framework. Switching to a modern CMS provided many updated features and integrations for them, and also brought the project into the open source space.
+
+This project is no longer maintained by The Geek Gene as Time Banks USA went back to a more proprietary approach, and works with a different software development company on their new version of the tools.
+
+## Overview
 
 This installation guide is intended for someone who knows Drupal and wants to install Community Weaver 2.0 on their own server.
 
@@ -8,18 +15,21 @@ Community Weaver 2.0 is based on Drupal 6; uses about 80 contributed Drupal modu
     the Availability Check Grid Module - creates a grid of checkboxes to show a user's general availability throughout the week
     the MYSQL template of the Drupal database for Community Weaver 2.0 - provides all the settings and configurations that make up a complete Community Weaver 2.0 website ready for new users, ads, transactions, and other content to be added
 
+## Installation
+
 The installation process includes the following 10 steps. (see below for details.)
-1. Install Drupal
-2. Install Current Versions of Contributed Modules
-3. Install Supporting Code Libraries
-4. Install the Required Theme
-5. Install Availability Check Grid module
-6. Install Time Banks module
-7. Load Community Weaver 2.0 database template
-8. Configure Various Community Weaver and Drupal System Components
-9. Configure Web Host Settings
-10. Configure Final Settings in Drupal
-1. Install Drupal
+  1. Install Drupal
+  2. Install Current Versions of Contributed Modules
+  3. Install Supporting Code Libraries
+  4. Install the Required Theme
+  5. Install Availability Check Grid module
+  6. Install Time Banks module
+  7. Load Community Weaver 2.0 database template
+  8. Configure Various Community Weaver and Drupal System Components
+  9. Configure Web Host Settings
+  10. Configure Final Settings in Drupal
+
+### 1. Install Drupal
 
 Start with a fresh installation of drupal 6.x and install it as a multisite installation.  As of this writing the current version is 6.25.  Where this should be installed is highly dependent upon your host/server provider, but generally goes wherever index.html can be found.  It might be /var/www/html or ~/www or /public_html. A guide on drupal installation can be found here.  Download the compressed archive of drupal from http://drupal.org/project/drupal.  From the command line you can use the following, replacing the x with the appropriate version:
 
@@ -34,7 +44,7 @@ In the [Drupal_Home] directory, there will be a sites/ directory and a sites/def
     files/
     settings.php  
 
-2. Install Current Versions of Contributed Modules
+### 2. Install Current Versions of Contributed Modules
 
 Then you'll also need the following contributed modules installed in [Drupal_Home]/sites/all/modules/ :
 
@@ -128,7 +138,8 @@ Community Weaver 2.0 currently originally used a development version of Mutual C
 Views 6.x-2.16 caused some problems with custom fields.  2.15 may work, but we haven't extensively tested it.  We know 2.13 works.
 
 The last release of views_send does not work with the newest version of views_bulk_operations.  A patch is supposedly available here: https://drupal.org/node/1200584 but we have not yet tested it.  The only release available now, a dev release, may or may not contain that patch.
-3. Install Supporting Code Libraries
+
+### 3. Install Supporting Code Libraries
 
 In [Drupal_Home]/sites/all/libraries you'll need the following related libraries:
 
@@ -136,7 +147,7 @@ In [Drupal_Home]/sites/all/libraries you'll need the following related libraries
     http://code.google.com/p/jquery-ui/downloads/detail?name=jquery.ui-1.6.zip&can=2&q=1.6
     http://tablesorter.com/__jquery.tablesorter.zip
 
-4. Install the Required Theme
+### 4. Install the Required Theme
 
 In addition you'll need the following themes:
 
@@ -144,21 +155,23 @@ In addition you'll need the following themes:
     http://drupal.org/project/acquia_marina
 
 Both of these should be put in [Drupal_Home]/sites/all/themes.
-5. Install Availability Check Grid module
+
+### 5. Install Availability Check Grid module
 
 Download the module from GitHub here: https://github.com/GeekGene/avail_cck_field/zipball/master
 Unzip the file downloaded file.  Rename the directory to avail_cck_field and copy it to [Drupal_Home]/sites/all/modules/
-6. Install Time Banks module
+
+### 6. Install Time Banks module
 
 Download the module from GitHub here: https://github.com/GeekGene/GeekGene-time_banks/zipball/master
 
 Unzip the file downloaded.  The time_banks directory should be installed in [Drupal_Home]/sites/all/modules/
-7. Install Community Weaver 2.0
+
+### 7. Install Community Weaver 2.0
 
 Download the whole Community Weaver package from here: https://github.com/GeekGene/Community-Weaver/zipball/master
 
 Files that should included in download:
-
 
     CHANGELOG.txt    log of changes
     COPYRIGHT.txt      copyright statement, references GNU GPL 2.0
@@ -188,7 +201,7 @@ The database name in this file is drupal622_template.  You can change that to wh
 
     (mysql prompt) mysql> flush privileges;
 
-8. Configure Various Community Weaver and Drupal System Components
+### 8. Configure Various Community Weaver and Drupal System Components
 
 In settings.php on the line that starts with $db_url change the settings to those you just used for database name (if you changed it), username, and password.  Thus:
 
@@ -208,10 +221,12 @@ In [Drupal_Home]/sites/all/themes/acquia_marina/css create a symbolic link to ..
    ln -s ../../../modules/time_banks/theme/local.css
 
 We keep both of these files in the time_banks directory to make revision control a little easier.  And, if you blow them away when upgrading acquia_marina you've only lost symlinks and not entire files.  You won't need actionhub-override.css and store.css.  They're for some other related sites that are beyond the scope of setting up a single timebank.
-9. Configure Apache Settings
+
+### 9. Configure Apache Settings
 
 You'll need to tell your webserver about this drupal installation.  Assuming apache is your webserver and it's installed on your server at /etc/apache, you'll need to edit your existing vhosts file or add a vhosts file just for this website.  Add something like the following to the end of your vhosts file:
 
+```
     <VirtualHost *:80>
         ServerName [YOURSITE]
         ServerAlias *.[YOURSITE]
@@ -223,12 +238,13 @@ You'll need to tell your webserver about this drupal installation.  Assuming apa
             Options FollowSymLinks
         </Directory>
     </VirtualHost>
+```
 
 if /etc/apache/vhosts is a directory, create a new text file with a filename of [YOURSITE] and add the previous text.  Rather than a vhosts file or directory, you have have a httpd.conf file.  The same text would go at the end of it.  You'll need to restart apache before these settings are used.
 
     sv restart apache
 
-10. Configure Final Settings in Drupal
+### 10. Configure Final Settings in Drupal
 
 This installation comes only with the administrative user (uid=1). So now that your site is up and running, login with username "admin" and  password "password".  
 
